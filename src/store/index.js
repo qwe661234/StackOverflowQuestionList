@@ -26,13 +26,13 @@ export default new Vuex.Store({
     },
     actions: {
         [GET_TAGNAMES_ACTION](store) {
-            // axios.get("https://api.stackexchange.com/2.2/tags?order=desc&sort=popular&site=stackoverflow")
-            axios.get("/tagList.json")
+            axios.get("https://api.stackexchange.com/2.2/tags?order=desc&sort=popular&site=stackoverflow")
+            // axios.get("/tagList.json")
                 .then( async (res) => {
                     var data = res.data.items.slice(0, 10);
                     await store.commit(TAGNAMES_MUTATION, data);
-                    // axios.get(`https://api.stackexchange.com/2.2/search?order=desc&sort=activity&tagged=${data[0].name}&site=stackoverflow`)
-                    axios.get("/test.json")
+                    axios.get(`https://api.stackexchange.com/2.2/search?order=desc&sort=activity&tagged=${data[0].name}&site=stackoverflow`)
+                    // axios.get("/test.json")
                     .then((res) => {
                         store.commit(QUESTIONS_MUTATION, res.data.items);
                     })
@@ -41,20 +41,20 @@ export default new Vuex.Store({
         [GET_TAGNAMESBYSEARCH_ACTION](store, value)
         {
             console.log(store, value);
-            // axios.get(`https://api.stackexchange.com/2.2/tags/${value}/related?site=stackoverflow`)
-            //     .then( async(res) => {
-            //         var data = res.data.items.slice(0, 10);
-            //         await store.commit(TAGNAMES_MUTATION, data);
-            //         axios.get(`https://api.stackexchange.com/2.2/search?order=desc&sort=activity&tagged=${data[0].name}&site=stackoverflow`)
-            //         .then((res) => {
-            //             store.commit(QUESTIONS_MUTATION, res.data.items);
-            //         })
-            //     })
+            axios.get(`https://api.stackexchange.com/2.2/tags/${value}/related?site=stackoverflow`)
+                .then( async(res) => {
+                    var data = res.data.items.slice(0, 10);
+                    await store.commit(TAGNAMES_MUTATION, data);
+                    axios.get(`https://api.stackexchange.com/2.2/search?order=desc&sort=activity&tagged=${data[0].name}&site=stackoverflow`)
+                    .then((res) => {
+                        store.commit(QUESTIONS_MUTATION, res.data.items);
+                    })
+                })
         },
         [GET_QUESTIONS_ACTION](store, value) {
-            // axios.get(`https://api.stackexchange.com/2.2/search?order=desc&sort=activity&tagged=${value}&site=stackoverflow`)
-            console.log(value);
-            axios.get("/test.json")
+            axios.get(`https://api.stackexchange.com/2.2/search?order=desc&sort=activity&tagged=${value}&site=stackoverflow`)
+            // console.log(value);
+            // axios.get("/test.json")
                 .then((res) => {
                     store.commit(QUESTIONS_MUTATION, res.data.items);
                 })   

@@ -22,11 +22,11 @@
               greenblock:
                 questionInfo.answer_count > 1 && questionInfo.is_answered
                   ? true
-                  : flase,
+                  : false,
               greenborder:
                 questionInfo.answer_count > 1 && !questionInfo.is_answered
                   ? true
-                  : flase,
+                  : false,
             }"
           >
             {{ questionInfo.answer_count }}
