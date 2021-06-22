@@ -22,4 +22,10 @@ export default {
 </script>
 
 <style scoped>
+.el-tag{
+    margin: 0 5px 0 5px;
+    height: 50px;
+    border-radius: 15px;
+    padding-top: 10px;    
+}
 </style>

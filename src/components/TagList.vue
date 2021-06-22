@@ -1,6 +1,6 @@
 <template>
   <div class="tagList">
-    <h1>Trending</h1>
+    <h1 class="title" >Trending</h1>
     <Tag
       v-for="item in tagNames"
       :key="item.name"
@@ -32,6 +32,10 @@ export default {
 </script>
 
 <style scoped>
+.title {
+  position: relative;
+  right: 255px;
+}
 .selected {
   color: black;
   background-color: #85bef7;
