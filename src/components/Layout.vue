@@ -5,6 +5,7 @@
     </el-header>
     <el-main>
       <TagList></TagList>
+      <QuestionList></QuestionList>
     </el-main>
   </el-container>
 </template>
@@ -12,12 +13,14 @@
 <script>
 import SearchBar from './SearchBar.vue';
 import TagList from './TagList.vue';
+import QuestionList from './QuestionList.vue'
 
 export default {
   name: "Layout",
   components: {
     SearchBar,
-    TagList
+    TagList,
+    QuestionList
   }
 };
 </script>
