@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="qustionList">
         <Question v-for="item in questions" :key="item.title" :questionInfo="item"></Question>
     </div>
   </template>
@@ -23,4 +23,7 @@ export default {
 </script>
 
 <style scoped>
+.qustionList {
+    margin-top: 20px;
+}
 </style>

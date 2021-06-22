@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <h1>Tag:</h1>
+  <div class="tagList">
+    <h1>Trending</h1>
     <Tag
       v-for="item in tagNames"
       :key="item.name"
@@ -26,10 +26,7 @@ export default {
     selectedTag: (state) => state.selectedTag,
   }),
   mounted() {
-    this.$store.dispatch(GET_TAGNAMES_ACTION)
-    .then(() => {
-        console.log(this.selectedTag);
-    })
+    this.$store.dispatch(GET_TAGNAMES_ACTION);
   },
 };
 </script>
@@ -41,5 +38,8 @@ export default {
 }
 .unselected {
   color: black;
+}
+.tagList{
+  text-align: center;
 }
 </style>

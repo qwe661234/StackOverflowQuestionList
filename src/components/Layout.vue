@@ -27,12 +27,12 @@ export default {
 
 <style scoped>
 
+
 .el-header {
-  position: fixed;
-  top: 10px;
+  margin-top: 20px;
+  text-align: center;
 }
 .el-main {
-  margin-top: 20px;
   height: 1000px;
 }
 
