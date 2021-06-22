@@ -1,10 +1,14 @@
 <template>
+  <div>
   <el-input v-model="input" @input="consoleInput()" placeholder="Tag">
     <el-button type="primary" slot="append"> Search </el-button>
   </el-input>
+  </div>
 </template>
 
 <script>
+import {mapState} from 'vuex';
+
 export default {
   name: "SearchBar",
   data() {
@@ -13,10 +17,12 @@ export default {
     };
   },
   methods: {
-    consoleInput: function () {
+    consoleInput: function() {
       console.log(this.input);
     },
   },
+  computed:mapState({
+    }),
 };
 </script>
 

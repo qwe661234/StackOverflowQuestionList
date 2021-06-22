@@ -6,24 +6,21 @@
 </template>
 
 <script>
+import {mapState} from 'vuex'; 
 import Tag from './Tag.vue';
+import { GET_TAGNAMES_ACTION } from '../type/index';
 
 export default {
     name: "TagList",
-    data() {
-        return {
-            tagNames: [],
-        }
-    },
     components: {
         Tag,
     },
+    computed:mapState({
+        tagNames: state=>state.tagNames,
+    }),
     mounted() {
-      this.axios.get("https://api.stackexchange.com/2.2/tags?order=desc&sort=popular&site=stackoverflow")
-      .then((res) => {
-        this.tagNames = res.data.items.slice(0, 10);
-      })
-  }
+        this.$store.dispatch(GET_TAGNAMES_ACTION);
+    }
 }
 </script>
 
