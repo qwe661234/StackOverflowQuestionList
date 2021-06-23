@@ -4,6 +4,7 @@
       v-for="item in questions"
       :key="item.title"
       :questionInfo="item"
+      class="question"
     ></Question>
   </div>
 </template>
@@ -27,6 +28,10 @@ export default {
 
 <style scoped>
 .qustionList {
-  margin-top: 20px;
+  margin-top: 50px;
+}
+.question {
+  position: relative;
+  left: 340px;
 }
 </style>

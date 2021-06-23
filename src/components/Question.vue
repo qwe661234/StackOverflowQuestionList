@@ -45,7 +45,7 @@
               :src="questionInfo.owner.profile_image"
             ></el-avatar>
           </div>
-          <div class="grid-content text-center image-margin">
+          <div class="grid image-margin">
             {{ questionInfo.owner.display_name }}
           </div>
         </el-col>
@@ -100,5 +100,8 @@ export default {
 .greenblock {
   background-color: green;
   color: white;
+}
+.el-divider{
+  width: 750px;
 }
 </style>

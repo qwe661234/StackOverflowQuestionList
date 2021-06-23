@@ -5,7 +5,7 @@
       v-for="item in tagNames"
       :key="item.name"
       :tagName="item.name"
-      :class="{ selected: selectedTag === item.name ? true : false, unselected: selectedTag === item.name ? false : true }"
+      :class="{ selected: selectedTag === item.name ? true : false }"
     >
     </Tag>
   </div>
@@ -39,9 +39,6 @@ export default {
 .selected {
   color: black;
   background-color: #85bef7;
-}
-.unselected {
-  color: black;
 }
 .tagList{
   text-align: center;

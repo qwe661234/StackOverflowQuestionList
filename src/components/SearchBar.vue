@@ -14,6 +14,7 @@ export default {
   name: "SearchBar",
   methods: {
     sendKey: function() {
+      console.log(this.inputValue);
       if(this.inputValue === "") {
         this.$store.dispatch(GET_TAGNAMES_ACTION);
       } else {
