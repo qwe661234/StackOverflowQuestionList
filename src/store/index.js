@@ -36,7 +36,7 @@ export default new Vuex.Store({
     actions: {
         [GET_TAGNAMES_ACTION](store) {
             store.commit(LOADING_MUTATION, true);
-            fetch("https://api.stackexchange.com/2.2/tags?order=desc&sort=popular&site=stackoverflow")
+            fetch("https://api.stackexchange.com/2.2/tags?order=desc&sort=popular&site=stackoverflow".replace("#", "%23"))
             // fetch("/tagList.json")
             .then((res) => res.json())
                 .then(async (res) => {
@@ -59,7 +59,7 @@ export default new Vuex.Store({
         [GET_TAGNAMESBYSEARCH_ACTION](store, value) {
             store.commit(LOADING_MUTATION, true);
             // console.log(store, value);
-            fetch(`https://api.stackexchange.com/2.2/tags/${value}/related?site=stackoverflow`)
+            fetch(`https://api.stackexchange.com/2.2/tags/${value}/related?site=stackoverflow`.replace("#", "%23"))
             .then((res) => res.json())
                 .then(async (res) => {
                     var data = res.items.slice(0, 10);
@@ -80,7 +80,7 @@ export default new Vuex.Store({
         [GET_QUESTIONS_ACTION](store, value) {
             // console.log(value);
             store.commit(LOADING_MUTATION, true);
-            fetch(`https://api.stackexchange.com/2.2/search?order=desc&sort=activity&tagged=${value}&site=stackoverflow`)
+            fetch(`https://api.stackexchange.com/2.2/search?order=desc&sort=activity&tagged=${value}&site=stackoverflow`.replace("#", "%23"))
             // fetch("/test.json")
                 .then((res) => res.json())
                 .then(async (res) => {
