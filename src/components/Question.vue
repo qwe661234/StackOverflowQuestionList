@@ -1,5 +1,5 @@
 <template>
-  <a :href="questionInfo.link">
+  <a :href="questionInfo.link" target="_blank" rel="noopener noreferrer">
     <div class="question">
       <div class="title">{{ questionInfo.title }}</div>
       <el-row :gutter="20">
