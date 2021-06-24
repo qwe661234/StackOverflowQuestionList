@@ -22,14 +22,19 @@ yarn serve
 
 ### Trending Tags
 
-* Display top 10 trending tags 
-* User can select any tag in Tag List
-* Default selected the first tag
+* Display top 10 trending tags.
+* Select any tag in tag list.
+* Default selected the first tag.
+
 ### Question Listing
-* Display Questions according to the selected Tag (default page size is 20)
-* Support infinite scrolling (20 questions per fetch)
+
+* Display Questions according to the selected Tag. (default page size is 20)
+* Support infinite scrolling .(20 questions per fetch)
+* Click any question in question list will open a new tab to the question link.
+
 ### Searching
 
+* Type keywords in searching bar to search corresponding trending tags.
 
 ## Reference
 
