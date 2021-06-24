@@ -42,18 +42,14 @@ export default new Vuex.Store({
                 .then(async (res) => {
                     var data = res.items.slice(0, 10);
                     await store.commit(TAGNAMES_MUTATION, data);
-                    if (data.length !== 0) {
-                        fetch(`https://api.stackexchange.com/2.2/search?order=desc&sort=activity&tagged=${data[0].name}&site=stackoverflow`.replace("#", "%23"))
-                            // fetch("/test.json")
-                            .then((res) => res.json())
-                            .then(async(res) => {
-                                await store.commit(PAGESIZE_MUTATION, 20);
-                                await store.commit(QUESTIONS_MUTATION, res.items);
-                                store.commit(LOADING_MUTATION, false);
-                            })
-                    } else {
-                        store.commit(LOADING_MUTATION, false);
-                    }
+                    fetch(`https://api.stackexchange.com/2.2/search?order=desc&sort=activity&tagged=${data[0].name}&site=stackoverflow`.replace("#", "%23"))
+                        // fetch("/test.json")
+                        .then((res) => res.json())
+                        .then(async(res) => {
+                            await store.commit(PAGESIZE_MUTATION, 20);
+                            await store.commit(QUESTIONS_MUTATION, res.items);
+                            store.commit(LOADING_MUTATION, false);
+                        })
                 })
         },
         [GET_TAGNAMESBYSEARCH_ACTION](store, value) {
@@ -63,8 +59,8 @@ export default new Vuex.Store({
             .then((res) => res.json())
                 .then(async (res) => {
                     var data = res.items.slice(0, 10);
-                    await store.commit(TAGNAMES_MUTATION, data);
                     if (data.length !== 0) {
+                        await store.commit(TAGNAMES_MUTATION, data);
                         fetch(`https://api.stackexchange.com/2.2/search?order=desc&sort=activity&tagged=${data[0].name}&site=stackoverflow`.replace("#", "%23"))
                             .then((res) => res.json())
                             .then(async(res) => {
