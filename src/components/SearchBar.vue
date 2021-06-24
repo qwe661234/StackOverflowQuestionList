@@ -25,11 +25,11 @@ export default {
       if (timer) 
         clearTimeout(timer);
       if (this.inputValue === "") {
-        timer = setTimeout(function () {
+        timer = setTimeout(() => {
           this.$store.dispatch(GET_TAGNAMES_ACTION);
         }, 500);
       } else {
-        timer = setTimeout(function () {
+        timer = setTimeout(() => {
           this.$store.dispatch(GET_TAGNAMESBYSEARCH_ACTION, this.inputValue);
         }, 500);
       }
