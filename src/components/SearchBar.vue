@@ -1,29 +1,42 @@
 <template>
   <div>
-  <el-input v-model="$store.state.inputValue" @input="sendKey" placeholder="Tag">
-    <el-button type="primary" slot="append"> Search </el-button>
-  </el-input>
+    <el-input
+      v-model="$store.state.inputValue"
+      @input="sendKey"
+      placeholder="Tag"
+    >
+      <el-button type="primary" slot="append"> Search </el-button>
+    </el-input>
   </div>
 </template>
 
 <script>
-import {mapState} from 'vuex';
-import {GET_TAGNAMES_ACTION ,GET_TAGNAMESBYSEARCH_ACTION} from "../type/index";
+import { mapState } from "vuex";
+import {
+  GET_TAGNAMES_ACTION,
+  GET_TAGNAMESBYSEARCH_ACTION,
+} from "../type/index";
+var timer = null;
 
 export default {
   name: "SearchBar",
   methods: {
-    sendKey: function() {
-      console.log(this.inputValue);
-      if(this.inputValue === "") {
-        this.$store.dispatch(GET_TAGNAMES_ACTION);
+    sendKey: function () {
+      if (timer) 
+        clearTimeout(timer);
+      if (this.inputValue === "") {
+        timer = setTimeout(function () {
+          this.$store.dispatch(GET_TAGNAMES_ACTION);
+        }, 500);
       } else {
-        this.$store.dispatch(GET_TAGNAMESBYSEARCH_ACTION, this.inputValue);
+        timer = setTimeout(function () {
+          this.$store.dispatch(GET_TAGNAMESBYSEARCH_ACTION, this.inputValue);
+        }, 500);
       }
-    }
+    },
   },
-  computed:mapState({
-    inputValue: state => state.inputValue,
+  computed: mapState({
+    inputValue: (state) => state.inputValue,
   }),
 };
 </script>
