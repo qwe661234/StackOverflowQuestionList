@@ -7,7 +7,7 @@
     element-loading-customClass="spinner"
      v-loading.fullscreen="loading"
      >
-      <TagList></TagList>
+      <TagList :class="{fixedTag: scroll}"></TagList>
       <QuestionList></QuestionList>
     </el-main>
   </el-container>
@@ -32,6 +32,7 @@ export default {
   },
   computed: mapState({
     loading: (state) => state.loading,
+    scroll: (state) => state.scroll,
   }),
   methods: {
     handleScroll() {
@@ -56,13 +57,17 @@ export default {
 
 <style scoped>
 .el-header {
-  position: sticky;
-  width: 100%;
-  top: 0px;
-  text-align: center;
   height: 50px;
-  background-color: white;
-  z-index: 9999;
   margin-top: 20px;
+  text-align: center;
+  background-color: white;
 }
+.fixedTag {
+  position: fixed;
+  top: 0px;
+  width: 100%;
+  z-index: 9999;
+  background-color: white;
+}
+
 </style>

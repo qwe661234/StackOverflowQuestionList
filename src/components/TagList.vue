@@ -14,7 +14,7 @@
 <script>
 import { mapState } from "vuex";
 import Tag from "./Tag.vue";
-import { GET_TAGNAMES_ACTION } from "../type/index";
+import { GET_TAGNAMES_ACTION, SCROLL_MUTATION } from "../type/index";
 
 export default {
   name: "TagList",
@@ -25,6 +25,17 @@ export default {
     tagNames: (state) => state.tagNames,
     selectedTag: (state) => state.selectedTag,
   }),
+  methods: {
+    handleScroll() {
+      if(window.pageYOffset > this.$el.offsetHeight)
+        this.$store.commit(SCROLL_MUTATION, true);
+      else 
+        this.$store.commit(SCROLL_MUTATION, false);
+    }
+  },
+  created() {
+    window.addEventListener("scroll", this.handleScroll);
+  },
   mounted() {
     this.$store.dispatch(GET_TAGNAMES_ACTION);
   },

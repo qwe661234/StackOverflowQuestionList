@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import { LOADING_MUTATION, PAGESIZE_MUTATION, GET_TAGNAMES_ACTION, TAGNAMES_MUTATION, GET_TAGNAMESBYSEARCH_ACTION, GET_QUESTIONS_ACTION, QUESTIONS_MUTATION, SELECTEDTAGMUTATION } from '../type/index';
+import { SCROLL_MUTATION, LOADING_MUTATION, PAGESIZE_MUTATION, GET_TAGNAMES_ACTION, TAGNAMES_MUTATION, GET_TAGNAMESBYSEARCH_ACTION, GET_QUESTIONS_ACTION, QUESTIONS_MUTATION, SELECTEDTAGMUTATION } from '../type/index';
 
 Vue.use(Vuex)
 
@@ -13,6 +13,7 @@ export default new Vuex.Store({
         pageSize: 0,
         questionStorage: [],
         loading: false,
+        scroll: false,
     },
     mutations: {
         [TAGNAMES_MUTATION](state, value) {
@@ -31,7 +32,10 @@ export default new Vuex.Store({
         },
         [LOADING_MUTATION](state, value) {
             state.loading = value;
-        }
+        },
+        [SCROLL_MUTATION](state, value) {
+            state.scroll = value;
+        },
     },
     actions: {
         [GET_TAGNAMES_ACTION](store) {

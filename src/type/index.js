@@ -9,3 +9,4 @@ export const QUESTIONS_MUTATION = "questionsMutation";
 export const SELECTEDTAGMUTATION = "selectedTagMutation";
 export const PAGESIZE_MUTATION = "pageSizeMutation";
 export const LOADING_MUTATION = "loadingMutation";
+export const SCROLL_MUTATION = "scrollMutation";
