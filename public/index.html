@@ -7,8 +7,13 @@
 </head>
 
 <body>
+    <div id="fb-root">
+    </div>
+    <div id="fb-customer-chat" class="fb-customerchat">
+    </div>
     <script>
         var chatbox = document.getElementById('fb-customer-chat');
+        console.log(chatbox);
         chatbox.setAttribute("page_id", "100899444746193");
         chatbox.setAttribute("attribution", "biz_inbox");
         window.fbAsyncInit = function() {
@@ -28,10 +33,7 @@
         }(document, 'script', 'facebook-jssdk'));
     </script>
     <div id="app"></div>
-    <div id="fb-root">
-    </div>
-    <div id="fb-customer-chat" class="fb-customerchat">
-    </div>
+
 </body>
 
 </html>
