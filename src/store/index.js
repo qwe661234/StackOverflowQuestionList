@@ -1,87 +1,82 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
-import { SCROLL_MUTATION, LOADING_MUTATION, PAGESIZE_MUTATION, GET_TAGNAMES_ACTION, TAGNAMES_MUTATION, GET_TAGNAMESBYSEARCH_ACTION, GET_QUESTIONS_ACTION, QUESTIONS_MUTATION, SELECTEDTAGMUTATION } from '../type/index';
-
-Vue.use(Vuex)
+import Vue from "vue";
+import Vuex from "vuex";
+import {
+  SCROLL_MUTATION,
+  LOADING_MUTATION,
+  PAGE_MUTATION,
+  GET_TAGNAMES_ACTION,
+  TAGNAMES_MUTATION,
+  GET_TAGNAMESBYSEARCH_ACTION,
+  GET_QUESTIONS_ACTION,
+  QUESTIONS_MUTATION,
+  SELECTEDTAGMUTATION,
+  LOADMORE_QUESTION_MUTATION,
+} from "../type/index";
+import { fectchPopularTag, fetchQuestionByTag } from "./Api";
+Vue.use(Vuex);
 
 export default new Vuex.Store({
-    state: {
-        inputValue: "",
-        tagNames: [],
-        questions: [],
-        selectedTag: "",
-        pageSize: 0,
-        questionStorage: [],
-        loading: false,
-        scroll: false,
+  state: {
+    inputValue: "",
+    tagNames: [],
+    questions: [],
+    selectedTag: "",
+    page: 1,
+    loading: false,
+    scroll: false,
+  },
+  mutations: {
+    [TAGNAMES_MUTATION](state, value) {
+      console.log(value);
+      if (value.length != 0) {
+        state.tagNames = value;
+        state.selectedTag = value[0].name;
+      }
     },
-    mutations: {
-        [TAGNAMES_MUTATION](state, value) {
-            state.tagNames = value;
-            state.selectedTag = value[0].name;
-        },
-        [QUESTIONS_MUTATION](state, data) {
-            state.questionStorage = data;
-            state.questions = data.slice(0, state.pageSize);
-        },
-        [SELECTEDTAGMUTATION](state, value) {
-            state.selectedTag = value;
-        },
-        [PAGESIZE_MUTATION](state, data) {
-            state.pageSize = data;
-        },
-        [LOADING_MUTATION](state, value) {
-            state.loading = value;
-        },
-        [SCROLL_MUTATION](state, value) {
-            state.scroll = value;
-        },
+    [QUESTIONS_MUTATION](state, data) {
+      state.questions = data;
     },
-    actions: {
-        [GET_TAGNAMES_ACTION](store) {
-            store.commit(LOADING_MUTATION, true);
-            fetch("https://api.stackexchange.com/2.2/tags?order=desc&sort=popular&site=stackoverflow".replace("#", "%23"))
-            .then((res) => res.json())
-                .then(async (res) => {
-                    var data = res.items.slice(0, 10);
-                    await store.commit(TAGNAMES_MUTATION, data);
-                    fetch(`https://api.stackexchange.com/2.2/search?order=desc&sort=activity&tagged=${data[0].name}&site=stackoverflow`.replace("#", "%23"))
-                        .then((res) => res.json())
-                        .then(async(res) => {
-                            await store.commit(PAGESIZE_MUTATION, 20);
-                            await store.commit(QUESTIONS_MUTATION, res.items);
-                            store.commit(LOADING_MUTATION, false);
-                        })
-                })
-        },
-        [GET_TAGNAMESBYSEARCH_ACTION](store, value) {
-            store.commit(LOADING_MUTATION, true);
-            fetch(`https://api.stackexchange.com/2.2/tags/${value}/related?site=stackoverflow`.replace("#", "%23"))
-            .then((res) => res.json())
-                .then(async (res) => {
-                    var data = res.items.slice(0, 10);
-                    if (data.length !== 0) {
-                        await store.commit(TAGNAMES_MUTATION, data);
-                        fetch(`https://api.stackexchange.com/2.2/search?order=desc&sort=activity&tagged=${data[0].name}&site=stackoverflow`.replace("#", "%23"))
-                            .then((res) => res.json())
-                            .then(async(res) => {
-                                await store.commit(PAGESIZE_MUTATION, 20);
-                                await store.commit(QUESTIONS_MUTATION, res.items);
-                                store.commit(LOADING_MUTATION, false);
-                            })
-                    }else {
-                        store.commit(LOADING_MUTATION, false);
-                    }
-                })
-        },
-        [GET_QUESTIONS_ACTION](store, value) {
-            store.commit(LOADING_MUTATION, true);
-            fetch(`https://api.stackexchange.com/2.2/search?order=desc&sort=activity&tagged=${value}&site=stackoverflow`.replace("#", "%23"))
-                .then((res) => res.json())
-                .then(async (res) => {
-                    await store.commit(QUESTIONS_MUTATION, res.items);
-                    store.commit(LOADING_MUTATION, false);
-                })
-        }
+    [LOADMORE_QUESTION_MUTATION](state, data) {
+      state.questions = state.questions.concat(data);
+      console.log(state.questions);
     },
-})
+    [SELECTEDTAGMUTATION](state, value) {
+      state.selectedTag = value;
+    },
+    [PAGE_MUTATION](state, data) {
+      state.page = data;
+    },
+    [LOADING_MUTATION](state, value) {
+      state.loading = value;
+    },
+    [SCROLL_MUTATION](state, value) {
+      state.scroll = value;
+    },
+  },
+  actions: {
+    async [GET_TAGNAMES_ACTION](store) {
+      store.commit(LOADING_MUTATION, true);
+      const data = await fectchPopularTag();
+      await store.commit(TAGNAMES_MUTATION, data);
+      store.dispatch(GET_QUESTIONS_ACTION);
+    },
+    async [GET_TAGNAMESBYSEARCH_ACTION](store, value) {
+      store.commit(LOADING_MUTATION, true);
+      const data = await fectchPopularTag(value);
+      await store.commit(TAGNAMES_MUTATION, data);
+      store.dispatch(GET_QUESTIONS_ACTION);
+    },
+    async [GET_QUESTIONS_ACTION](store, value) {
+      store.commit(LOADING_MUTATION, true);
+      console.log(store.state.page);
+      const question = await fetchQuestionByTag(
+        store.state.page,
+        store.state.selectedTag
+      );
+      if (value === "load")
+        await store.commit(LOADMORE_QUESTION_MUTATION, question);
+      else await store.commit(QUESTIONS_MUTATION, question);
+      store.commit(LOADING_MUTATION, false);
+    },
+  },
+});

@@ -3,7 +3,7 @@
     <Question
       v-for="item in questions"
       :key="item.title"
-      :questionInfo="item"
+      :question-info="item"
       class="question"
     ></Question>
   </div>

@@ -1,10 +1,10 @@
 <template>
   <div class="tagList">
-    <h1 class="title" >Trending</h1>
+    <h1 class="title">Trending</h1>
     <Tag
       v-for="item in tagNames"
       :key="item.name"
-      :tagName="item.name"
+      :tag-name="item.name"
       :class="{ selected: selectedTag === item.name ? true : false }"
     >
     </Tag>
@@ -25,19 +25,18 @@ export default {
     tagNames: (state) => state.tagNames,
     selectedTag: (state) => state.selectedTag,
   }),
-  methods: {
-    handleScroll() {
-      if(window.pageYOffset > this.$el.offsetHeight)
-        this.$store.commit(SCROLL_MUTATION, true);
-      else 
-        this.$store.commit(SCROLL_MUTATION, false);
-    }
-  },
   created() {
     window.addEventListener("scroll", this.handleScroll);
   },
   mounted() {
     this.$store.dispatch(GET_TAGNAMES_ACTION);
+  },
+  methods: {
+    handleScroll() {
+      if (window.pageYOffset > this.$el.offsetHeight)
+        this.$store.commit(SCROLL_MUTATION, true);
+      else this.$store.commit(SCROLL_MUTATION, false);
+    },
   },
 };
 </script>
@@ -51,7 +50,7 @@ export default {
   color: black;
   background-color: #85bef7;
 }
-.tagList{
+.tagList {
   text-align: center;
 }
 </style>
