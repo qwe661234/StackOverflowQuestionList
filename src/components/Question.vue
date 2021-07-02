@@ -67,7 +67,7 @@ export default {
 </script>
 
 <style scoped>
-a{
+a {
   text-decoration: none;
 }
 .question {
@@ -104,7 +104,7 @@ a{
   background-color: green;
   color: white;
 }
-.el-divider{
+.el-divider {
   width: 750px;
 }
 </style>

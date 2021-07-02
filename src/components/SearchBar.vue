@@ -2,10 +2,10 @@
   <div>
     <el-input
       v-model="$store.state.inputValue"
-      @input="sendKey"
       placeholder="Tag"
+      @input="sendKey"
     >
-      <el-button type="primary" slot="append"> Search </el-button>
+      <el-button slot="append" type="primary"> Search </el-button>
     </el-input>
   </div>
 </template>
@@ -22,8 +22,7 @@ export default {
   name: "SearchBar",
   methods: {
     sendKey: function () {
-      if (timer) 
-        clearTimeout(timer);
+      if (timer) clearTimeout(timer);
       if (this.inputValue === "") {
         timer = setTimeout(() => {
           this.$store.dispatch(GET_TAGNAMES_ACTION);
