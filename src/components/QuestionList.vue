@@ -28,10 +28,10 @@ export default {
 
 <style scoped>
 .qustionList {
-  margin-top: 50px;
+  margin-top: 10vh;
 }
 .question {
   position: relative;
-  left: 340px;
+  left: 25vw;
 }
 </style>

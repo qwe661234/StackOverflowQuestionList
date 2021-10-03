@@ -44,7 +44,7 @@ export default {
 <style scoped>
 .title {
   position: relative;
-  right: 255px;
+  text-align: center;
 }
 .selected {
   color: black;
