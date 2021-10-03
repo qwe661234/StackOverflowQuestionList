@@ -56,13 +56,16 @@ export default {
   height: 50px;
   margin-top: 20px;
   text-align: center;
-  background-color: white;
+  background-color: transparent;
 }
 .fixedTag {
   position: fixed;
   top: 0px;
   width: 100%;
   z-index: 9999;
-  background-color: white;
+  background-color: transparent;
+}
+.el-container {
+  background-image: url("https://media.wired.com/photos/5926db217034dc5f91becd6b/master/w_2560%2Cc_limit/so-logo-s.jpg");
 }
 </style>
