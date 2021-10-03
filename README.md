@@ -1,4 +1,4 @@
-# VuePreStudy
+# mockStackOverflowQuestionList
 
 contributed by [`qwe661234`](https://github.com/qwe661234)
 
@@ -8,8 +8,8 @@ contributed by [`qwe661234`](https://github.com/qwe661234)
 
 ## Project setup
 ```
-git clone https://github.com/qwe661234/VuePreStudy.git
-cd VuePreStudy
+git clone https://github.com/qwe661234/mockStackOverflowQuestionList.git
+cd mockStackOverflowQuestionList
 yarn install
 ```
 
